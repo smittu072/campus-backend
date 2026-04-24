@@ -1,7 +1,13 @@
 from pymongo import MongoClient
+import os
 
-MONGO_URL = "mongodb+srv://smitppatel0712_db_user:oh9u6BYfMIGNOsbW@cluster0.cw23chq.mongodb.net/?retryWrites=true&w=majority"
+MONGO_URL = os.getenv("MONGO_URL")
+
+if not MONGO_URL:
+    raise Exception("❌ MONGO_URL not found in environment variables")
 
 client = MongoClient(MONGO_URL)
 
 db = client["campusDB"]
+
+print("✅ MongoDB Connected")
